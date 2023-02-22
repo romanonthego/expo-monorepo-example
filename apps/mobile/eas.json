@@ -1,35 +1,47 @@
 {
   "cli": {
+    "version": ">=2.5.1",
     "promptToConfigurePushNotifications": false
   },
   "build": {
-    "monorepo": {
-      "cache": {
-        "key": "turbo",
-        "customPaths": [
-          "../../node_modules/.cache/turbo"
-        ]
-      }
-    },
     "development": {
-      "extends": "monorepo",
+      "channel": "development",
+      "developmentClient": true,
       "distribution": "internal",
       "android": {
-        "buildType": "apk"
+        "gradleCommand": ":app:assembleDevelopmentDebug"
       },
       "ios": {
+        "buildConfiguration": "Debug",
+        "scheme": "youhodler-dev",
+        "resourceClass": "m1-medium"
+      }
+    },
+    "preview": {
+      "channel": "preview",
+      "distribution": "internal",
+      "android": {
+        "gradleCommand": ":app:assembleProductionRelease"
+      },
+      "ios": {
+        "buildConfiguration": "Release",
+        "scheme": "youhodler",
         "resourceClass": "m1-medium"
       }
     },
     "production": {
-      "extends": "monorepo",
-      "distribution": "store",
+      "channel": "production",
       "android": {
-        "buildType": "app-bundle"
+        "gradleCommand": ":app:assembleProductionRelease"
       },
       "ios": {
+        "buildConfiguration": "Release",
+        "scheme": "youhodler",
         "resourceClass": "m1-medium"
       }
     }
+  },
+  "submit": {
+    "production": {}
   }
 }

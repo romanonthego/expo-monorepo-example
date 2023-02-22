@@ -1,26 +1,24 @@
-// Learn more https://docs.expo.dev/guides/monorepos
+// Learn more https://docs.expo.io/guides/customizing-metro
 const { getDefaultConfig } = require('expo/metro-config');
-const { FileStore } = require('metro-cache');
-const path = require('path');
 
-const projectRoot = __dirname;
-const workspaceRoot = path.resolve(projectRoot, '../..');
+const config = getDefaultConfig(__dirname);
 
-const config = getDefaultConfig(projectRoot);
+config.watcher = config.watcher || {};
 
-// #1 - Watch all files in the monorepo
-config.watchFolders = [workspaceRoot];
-// #3 - Force resolving nested modules to the folders below
-config.resolver.disableHierarchicalLookup = true;
-// #2 - Try resolving with project modules first, then workspace modules
-config.resolver.nodeModulesPaths = [
-  path.resolve(projectRoot, 'node_modules'),
-  path.resolve(workspaceRoot, 'node_modules'),
-];
+config.watcher.additionalExts = config.watcher.additionalExts || [];
 
-// Use turborepo to restore the cache when possible
-config.cacheStores = [
-  new FileStore({ root: path.join(projectRoot, 'node_modules', '.cache', 'metro') }),
-];
+config.watcher.watchman = config.watcher.watchman || {};
+
+// Add support for react-native-svg-transformer
+config.transformer = {
+  ...config.transformer,
+  babelTransformerPath: require.resolve("react-native-svg-transformer"),
+};
+
+config.resolver = {
+  ...config.resolver,
+  assetExts: config.resolver.assetExts.filter((ext) => ext !== "svg"),
+  sourceExts: [...config.resolver.sourceExts, "svg"],
+};
 
 module.exports = config;

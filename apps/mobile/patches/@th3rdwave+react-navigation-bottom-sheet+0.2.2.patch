@@ -1,0 +1,98 @@
+diff --git a/node_modules/@th3rdwave/react-navigation-bottom-sheet/lib/commonjs/BottomSheetView.js b/node_modules/@th3rdwave/react-navigation-bottom-sheet/lib/commonjs/BottomSheetView.js
+index 04a1ee9..4abece1 100644
+--- a/node_modules/@th3rdwave/react-navigation-bottom-sheet/lib/commonjs/BottomSheetView.js
++++ b/node_modules/@th3rdwave/react-navigation-bottom-sheet/lib/commonjs/BottomSheetView.js
+@@ -99,6 +99,7 @@ function BottomSheetView(_ref2) {
+       backgroundStyle,
+       handleIndicatorStyle,
+       snapPoints = DEFAULT_SNAP_POINTS,
++      stackBehavior,
+       ...sheetProps
+     } = options;
+     return /*#__PURE__*/React.createElement(BottomSheetModalScreen, _extends({
+@@ -107,6 +108,7 @@ function BottomSheetView(_ref2) {
+       ,
+       index: Math.min((_ref3 = (_route$snapToIndex = route.snapToIndex) !== null && _route$snapToIndex !== void 0 ? _route$snapToIndex : index) !== null && _ref3 !== void 0 ? _ref3 : 0, snapPoints.length - 1),
+       snapPoints: snapPoints,
++      stackBehavior: stackBehavior,
+       navigation: navigation,
+       backgroundStyle: [themeBackgroundStyle, backgroundStyle],
+       handleIndicatorStyle: [themeHandleIndicatorStyle, handleIndicatorStyle]
+diff --git a/node_modules/@th3rdwave/react-navigation-bottom-sheet/lib/module/BottomSheetView.js b/node_modules/@th3rdwave/react-navigation-bottom-sheet/lib/module/BottomSheetView.js
+index fc10de3..a6576cf 100644
+--- a/node_modules/@th3rdwave/react-navigation-bottom-sheet/lib/module/BottomSheetView.js
++++ b/node_modules/@th3rdwave/react-navigation-bottom-sheet/lib/module/BottomSheetView.js
+@@ -85,6 +85,7 @@ export function BottomSheetView(_ref2) {
+       backgroundStyle,
+       handleIndicatorStyle,
+       snapPoints = DEFAULT_SNAP_POINTS,
++      stackBehavior,
+       ...sheetProps
+     } = options;
+     return /*#__PURE__*/React.createElement(BottomSheetModalScreen, _extends({
+@@ -94,6 +95,7 @@ export function BottomSheetView(_ref2) {
+       index: Math.min((_ref3 = (_route$snapToIndex = route.snapToIndex) !== null && _route$snapToIndex !== void 0 ? _route$snapToIndex : index) !== null && _ref3 !== void 0 ? _ref3 : 0, snapPoints.length - 1),
+       snapPoints: snapPoints,
+       navigation: navigation,
++      stackBehavior: stackBehavior,
+       backgroundStyle: [themeBackgroundStyle, backgroundStyle],
+       handleIndicatorStyle: [themeHandleIndicatorStyle, handleIndicatorStyle]
+     }, sheetProps), render());
+diff --git a/node_modules/@th3rdwave/react-navigation-bottom-sheet/lib/typescript/types.d.ts b/node_modules/@th3rdwave/react-navigation-bottom-sheet/lib/typescript/types.d.ts
+index e03cf4e..70507fa 100644
+--- a/node_modules/@th3rdwave/react-navigation-bottom-sheet/lib/typescript/types.d.ts
++++ b/node_modules/@th3rdwave/react-navigation-bottom-sheet/lib/typescript/types.d.ts
+@@ -1,4 +1,4 @@
+-import type { BottomSheetProps } from '@gorhom/bottom-sheet';
++import type { BottomSheetProps, BottomSheetModalProps} from '@gorhom/bottom-sheet';
+ import type { DefaultNavigatorOptions, Descriptor, NavigationHelpers, NavigationProp, NavigationState, ParamListBase, RouteProp, StackActionHelpers } from '@react-navigation/native';
+ export declare type BottomSheetNavigationEventMap = {};
+ export declare type BottomSheetNavigationState<ParamList extends ParamListBase> = Omit<NavigationState<ParamList>, 'routes'> & {
+@@ -31,7 +31,7 @@ export declare type BottomSheetNavigationOptions = Omit<BottomSheetProps, 'conta
+      * @type Array<string | number>
+      */
+     snapPoints?: Array<string | number>;
+-};
++} & Pick<BottomSheetModalProps, 'stackBehavior'>;
+ export declare type BottomSheetNavigatorProps = DefaultNavigatorOptions<ParamListBase, BottomSheetNavigationState<ParamListBase>, BottomSheetNavigationOptions, BottomSheetNavigationEventMap> & BottomSheetNavigationConfig;
+ export declare type BottomSheetDescriptor = Descriptor<BottomSheetNavigationOptions, BottomSheetNavigationProp<ParamListBase>, RouteProp<ParamListBase>>;
+ export declare type BottomSheetDescriptorMap = {
+diff --git a/node_modules/@th3rdwave/react-navigation-bottom-sheet/src/BottomSheetView.tsx b/node_modules/@th3rdwave/react-navigation-bottom-sheet/src/BottomSheetView.tsx
+index a83edbe..3442a01 100644
+--- a/node_modules/@th3rdwave/react-navigation-bottom-sheet/src/BottomSheetView.tsx
++++ b/node_modules/@th3rdwave/react-navigation-bottom-sheet/src/BottomSheetView.tsx
+@@ -114,6 +114,7 @@ export function BottomSheetView({ state, descriptors }: Props) {
+               backgroundStyle,
+               handleIndicatorStyle,
+               snapPoints = DEFAULT_SNAP_POINTS,
++              stackBehaviour,
+               ...sheetProps
+             } = options;
+ 
+@@ -126,6 +127,7 @@ export function BottomSheetView({ state, descriptors }: Props) {
+                   route.snapToIndex ?? index ?? 0,
+                   snapPoints.length - 1,
+                 )}
++                stackBehavior={stackBehaviour}
+                 snapPoints={snapPoints}
+                 navigation={navigation}
+                 backgroundStyle={[themeBackgroundStyle, backgroundStyle]}
+diff --git a/node_modules/@th3rdwave/react-navigation-bottom-sheet/src/types.tsx b/node_modules/@th3rdwave/react-navigation-bottom-sheet/src/types.tsx
+index eb22fea..f9d0ef2 100644
+--- a/node_modules/@th3rdwave/react-navigation-bottom-sheet/src/types.tsx
++++ b/node_modules/@th3rdwave/react-navigation-bottom-sheet/src/types.tsx
+@@ -1,4 +1,4 @@
+-import type { BottomSheetProps } from '@gorhom/bottom-sheet';
++import type { BottomSheetProps, BottomSheetModalProps } from '@gorhom/bottom-sheet';
+ import type {
+   DefaultNavigatorOptions,
+   Descriptor,
+@@ -89,7 +89,7 @@ export type BottomSheetNavigationOptions = Omit<
+    * @type Array<string | number>
+    */
+   snapPoints?: Array<string | number>;
+-};
++} & Pick<BottomSheetModalProps, 'stackBehavior'>;
+ 
+ export type BottomSheetNavigatorProps = DefaultNavigatorOptions<
+   ParamListBase,

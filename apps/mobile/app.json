@@ -1,35 +1,47 @@
 {
   "expo": {
-    "name": "expo-monorepo",
-    "slug": "expo-monorepo",
+    "name": "youhodler",
+    "slug": "youhodler",
+    "owner": "youhodler",
+    "privacy": "hidden",
+    "jsEngine": "hermes",
+    "platforms": ["android", "ios"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/icon.png",
+    "scheme": "youhodler",
+    "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "checkAutomatically": "ON_LOAD",
+      "enabled": true,
+      "url": "https://u.expo.dev/f1f0d857-ff89-44fc-8fad-398501c60dd7"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "com.bycedric.expomonorepo",
-      "buildNumber": "1.0.0",
-      "supportsTablet": true
+      "supportsTablet": false,
+      "jsEngine": "hermes"
     },
     "android": {
-      "package": "com.bycedric.expomonorepo",
+      "jsEngine": "hermes",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/images/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f1f0d857-ff89-44fc-8fad-398501c60dd7"
+      }
+    },
+    "runtimeVersion": "1.0.0"
   }
 }
