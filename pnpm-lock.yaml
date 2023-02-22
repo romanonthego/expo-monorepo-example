@@ -12,6 +12,8 @@ importers:
 
   apps/mobile:
     specifiers:
+      '@acme/expo-settings': '*'
+      '@acme/ui': '*'
       '@babel/core': ~7.20.2
       '@expo/metro-config': ~0.5.2
       '@expo/vector-icons': ~13.0.0
@@ -90,6 +92,8 @@ importers:
       universal-tooltip: 0.2.0
       yarn-deduplicate: ~6.0.1
     dependencies:
+      '@acme/expo-settings': link:../../packages/expo-settings
+      '@acme/ui': link:../../packages/ui
       '@expo/metro-config': 0.5.2
       '@expo/vector-icons': 13.0.0
       '@gorhom/bottom-sheet': 4.4.5_7eozf4eueieai2lddrh65rizum
