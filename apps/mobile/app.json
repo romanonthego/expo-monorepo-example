@@ -5,7 +5,10 @@
     "owner": "youhodler",
     "privacy": "hidden",
     "jsEngine": "hermes",
-    "platforms": ["android", "ios"],
+    "platforms": [
+      "android",
+      "ios"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -22,7 +25,9 @@
       "enabled": true,
       "url": "https://u.expo.dev/f1f0d857-ff89-44fc-8fad-398501c60dd7"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": false,
       "jsEngine": "hermes"

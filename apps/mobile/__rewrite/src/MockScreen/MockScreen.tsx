@@ -90,7 +90,7 @@ export function MockScreen({
 }>) {
   const { ScrollView } = useScreenScrollViews();
   const { isAuthorized } = useAuth();
-  const router = useRouter();
+  // const router = useRouter();
   // const href = useHref();
   const navigation = useNavigation();
   const route = useRoute();
@@ -123,7 +123,7 @@ export function MockScreen({
           backgroundColor: "black",
         }}
       />
-      {/* <Info name="href" value={href.href} /> */}
+      {/* <Info name="href" value={router.} /> */}
       <Info name="filename" value={filename} />
       <Info name="isPresented" value={isPresented ? "true" : "false"} />
       <Info name="isAuthorized" value={isAuthorized ? "true" : "false"} />

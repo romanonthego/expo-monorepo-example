@@ -29,7 +29,7 @@ polyfillWebCrypto();
 
 // Must be exported or Fast Refresh won't update the context
 export function App() {
-  const ctx = require.context('./__checklist_expo_router/app');
+  const ctx = require.context("./__checklist_expo_router/app");
   // const ctx = require.context("./__expo_router_app/app");
   // const ctx = require.context("./__rewrite/app");
 

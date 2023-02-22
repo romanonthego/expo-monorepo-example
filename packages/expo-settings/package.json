@@ -1,6 +1,7 @@
 {
-  "name": "expo-settings",
+  "name": "@acme/expo-settings",
   "version": "0.1.0",
+  "private": true,
   "description": "My new module",
   "main": "build/index.js",
   "types": "build/index.d.ts",

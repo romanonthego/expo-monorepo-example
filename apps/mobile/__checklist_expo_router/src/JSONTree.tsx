@@ -40,14 +40,20 @@ const extendedTheme = {
   },
 };
 
-export function JSONTree({ data }: { data: Renderable }) {
+export function JSONTree({
+  data,
+  openAll,
+}: {
+  data: Renderable;
+  openAll?: boolean;
+}) {
   return (
     <ScrollView horizontal>
       <_JSONTree
         data={data}
         theme={extendedTheme as any}
         invertTheme={false}
-        // shouldExpandNode={() => true}
+        shouldExpandNode={openAll ? () => true : undefined}
       />
     </ScrollView>
   );

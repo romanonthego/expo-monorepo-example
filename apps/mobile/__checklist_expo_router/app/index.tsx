@@ -1,9 +1,8 @@
 import { View } from "react-native";
 import { Stack } from "expo-router";
-import { CheckList } from "../src";
-import { CHECKS } from "../src/CHECKS";
+import { CheckList, CHECKS } from "../src";
 
-export default function Index() {
+export default function IndexScreen() {
   return (
     <View style={{ flex: 1 }}>
       <Stack.Screen
